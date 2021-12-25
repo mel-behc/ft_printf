@@ -1,17 +1,14 @@
-#include <ft_printf.h>
+#include "ft_printf.h"
 
-static int count_digit(unsigned int nbr)
+static int count_digit(unsigned long nbr)
 {
 	unsigned long	num;
 	int     count;
 
 	num = nbr;
 	count = 0;
-	if (num <= 0)
-	{
-		num *= -1;
+	if (num == 0)
 		count = 1;
-	}
 	while (num > 0)
 	{
 		num /= 16;
@@ -20,9 +17,9 @@ static int count_digit(unsigned int nbr)
 	return (count);
 }
 
-char *ft_puthexa(unsigned int num)
+char *ft_puthexa(unsigned long num, char c)
 {
-    long    stock;
+    unsigned long    stock;
     char    *ptr;
     int     len;
 
@@ -31,6 +28,7 @@ char *ft_puthexa(unsigned int num)
     if (!ptr)
         return NULL;
     ptr[len] = '\0';
+    ptr[0] = '0';
     while (num > 0 && len > 0)
     {
         stock = num % 16;
@@ -40,5 +38,7 @@ char *ft_puthexa(unsigned int num)
             ptr[--len] = 87 + stock;
         num /= 16;
     }
+    if (c == 'X')
+        ft_toupper(ptr);
     return ptr;
 }

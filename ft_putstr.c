@@ -1,6 +1,6 @@
-#include <ft_printf.h>
+#include "ft_printf.h"
 
-void	ft_putstr(char *s)
+void	ft_putstr(char *s, int *j)
 {
 	int	i;
 
@@ -8,9 +8,8 @@ void	ft_putstr(char *s)
 	if (s != NULL)
 	{
 		while (s[i])
-		{
-			write(1, &s[i], 1);
-			i++;
-		}
+			ft_putchar(s[i++], j);
 	}
+	else
+		*j += write(1, "(null)", 6);
 }
